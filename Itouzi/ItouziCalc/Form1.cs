@@ -165,7 +165,7 @@ namespace ItouziCalc
 					if (monthBegin == 0) {
 						monthBegin = 12;
 					} else if (monthBegin == 1) {
-						time.AddYears(1);
+						time = time.AddYears(1);
 						dailyInterestRate = GetDailyInterestRate(DateTime.IsLeapYear(time.Year));
 					}
 				} else {
@@ -319,10 +319,13 @@ namespace ItouziCalc
 		{
 			if (textBox1.Text != "" &&
 				textBox3.Text != "") {
-				double gainInterest = GetActualInterestDays() * GetDailyInterestRate();
-				double totalInterest = getInterest(dateTimePicker1.Value, getValueDateToDueDate());
-				textBox4.Text = gainInterest.ToString("0.00");
-				textBox5.Text = (totalInterest - gainInterest).ToString("0.00");
+				double principle = double.Parse(textBox1.Text);
+				if (principle > 0.0) {
+					double gainInterest = GetActualInterestDays() * GetDailyInterestRate() * principle;
+					double totalInterest = getInterest(dateTimePicker1.Value, getValueDateToDueDate());
+					textBox4.Text = gainInterest.ToString("0.00");
+					textBox5.Text = (totalInterest - gainInterest).ToString("0.00");
+				}
 			}
 		}
 
@@ -379,7 +382,7 @@ namespace ItouziCalc
 					break;
 				}
 				if (totalDays >= 0) {
-					startTime.AddMonths(1);
+					startTime = startTime.AddMonths(1);
 					actualDays = actualDaysTmp;
 				} else {
 					break;
@@ -390,15 +393,59 @@ namespace ItouziCalc
 
 		private void textBox4_Leave(object sender, EventArgs e)
 		{
-			if (textBox1.Text != "") {
-				
+			if (textBox4.Text == "") {
 				return;
 			}
+
+			double interest = double.Parse(textBox4.Text);
+			if (textBox1.Text != "") {
+				double principle = double.Parse(textBox1.Text);
+				if (principle > 0.0)
+				{
+					double dailyInterestRate = interest / (GetActualInterestDays() * principle);
+					textBox3.Text = (dailyInterestRate * 365 * 100).ToString("0.00");
+				} else {
+					return;
+				}
+			} else if (textBox3.Text != "") {
+				double dailyInterestRate = GetDailyInterestRate();
+				if (dailyInterestRate > 0.0) {
+					textBox1.Text = (interest / dailyInterestRate / GetActualInterestDays()).ToString("0.00");
+				} else {
+					return;
+				}
+			}
+			double totalInterest = getInterest(dateTimePicker1.Value, getValueDateToDueDate());
+			textBox5.Text = (totalInterest - interest).ToString("0.00");
 		}
 
 		private void textBox5_Leave(object sender, EventArgs e)
 		{
-			
+			if (textBox5.Text == "") {
+				return;
+			}
+
+			double remainInterest = double.Parse(textBox5.Text);
+			if (textBox1.Text != "")
+			{
+				double principle = double.Parse(textBox1.Text);
+				if (principle > 0.0) {
+					double dailyInterestRate = remainInterest / ((getValueDateToDueDate() - GetActualInterestDays()) * principle);
+					textBox3.Text = (dailyInterestRate * 365 * 100).ToString("0.00");
+				} else {
+					return;
+				}
+			} else if (textBox3.Text != "") {
+				double dailyInterestRate = GetDailyInterestRate();
+				if (dailyInterestRate > 0.0)
+				{
+					textBox1.Text = (remainInterest / (dailyInterestRate * (getValueDateToDueDate() - GetActualInterestDays()))).ToString("0.00");
+				} else {
+					return;
+				}
+			}
+			double totalInterest = getInterest(dateTimePicker1.Value, getValueDateToDueDate());
+			textBox4.Text = (totalInterest - remainInterest).ToString("0.00");
 		}
 	}
 }
