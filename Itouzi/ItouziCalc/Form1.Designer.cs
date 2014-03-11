@@ -28,335 +28,419 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
-			this.label11 = new System.Windows.Forms.Label();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-			this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-			this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.textBox3 = new System.Windows.Forms.TextBox();
-			this.textBox4 = new System.Windows.Forms.TextBox();
-			this.textBox5 = new System.Windows.Forms.TextBox();
-			this.textBox6 = new System.Windows.Forms.TextBox();
-			this.textBox7 = new System.Windows.Forms.TextBox();
-			this.textBox8 = new System.Windows.Forms.TextBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
+			this.labelPrincipal = new System.Windows.Forms.Label();
+			this.labelPoundage = new System.Windows.Forms.Label();
+			this.labelValueDay = new System.Windows.Forms.Label();
+			this.labelTransferDay = new System.Windows.Forms.Label();
+			this.labelDueDay = new System.Windows.Forms.Label();
+			this.labelInterestRate = new System.Windows.Forms.Label();
+			this.labelInterest = new System.Windows.Forms.Label();
+			this.labelRemainInterest = new System.Windows.Forms.Label();
+			this.labelDiscountGold = new System.Windows.Forms.Label();
+			this.labelCreditorBenefitRate = new System.Windows.Forms.Label();
+			this.labelInvestorBenefitRate = new System.Windows.Forms.Label();
+			this.dateTimePickerValueDay = new System.Windows.Forms.DateTimePicker();
+			this.dateTimePickerDueDay = new System.Windows.Forms.DateTimePicker();
+			this.dateTimePickerTransferDay = new System.Windows.Forms.DateTimePicker();
+			this.textBoxPrincipal = new System.Windows.Forms.TextBox();
+			this.textBoxPoundage = new System.Windows.Forms.TextBox();
+			this.textBoxInterestRate = new System.Windows.Forms.TextBox();
+			this.textBoxInterest = new System.Windows.Forms.TextBox();
+			this.textBoxRemainInterest = new System.Windows.Forms.TextBox();
+			this.textBoxDiscountGold = new System.Windows.Forms.TextBox();
+			this.textBoxCreditorBenefitRate = new System.Windows.Forms.TextBox();
+			this.textBoxInvestorBenefitRate = new System.Windows.Forms.TextBox();
+			this.buttonCalcByDiscountGold = new System.Windows.Forms.Button();
+			this.buttoCalcByCreditorBenefitRate = new System.Windows.Forms.Button();
+			this.buttonCalcByInvestorBenefitRate = new System.Windows.Forms.Button();
+			this.buttonReset = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.textBoxTotalInterest = new System.Windows.Forms.TextBox();
+			this.labelTotalInterest = new System.Windows.Forms.Label();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.textBoxGainInterestDayMonthly = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// label1
+			// labelPrincipal
 			// 
-			this.label1.Location = new System.Drawing.Point(1, 14);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(87, 28);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "本金";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelPrincipal.Location = new System.Drawing.Point(1, 14);
+			this.labelPrincipal.Name = "labelPrincipal";
+			this.labelPrincipal.Size = new System.Drawing.Size(87, 30);
+			this.labelPrincipal.TabIndex = 0;
+			this.labelPrincipal.Text = "本金";
+			this.labelPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label2
+			// labelPoundage
 			// 
-			this.label2.Location = new System.Drawing.Point(225, 14);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(87, 28);
-			this.label2.TabIndex = 0;
-			this.label2.Text = "手续费率";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelPoundage.Location = new System.Drawing.Point(225, 12);
+			this.labelPoundage.Name = "labelPoundage";
+			this.labelPoundage.Size = new System.Drawing.Size(87, 30);
+			this.labelPoundage.TabIndex = 0;
+			this.labelPoundage.Text = "手续费率";
+			this.labelPoundage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label3
+			// labelValueDay
 			// 
-			this.label3.Location = new System.Drawing.Point(1, 52);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(87, 28);
-			this.label3.TabIndex = 0;
-			this.label3.Text = "起息日";
-			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelValueDay.Location = new System.Drawing.Point(1, 48);
+			this.labelValueDay.Name = "labelValueDay";
+			this.labelValueDay.Size = new System.Drawing.Size(87, 30);
+			this.labelValueDay.TabIndex = 0;
+			this.labelValueDay.Text = "起息日";
+			this.labelValueDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label4
+			// labelTransferDay
 			// 
-			this.label4.Location = new System.Drawing.Point(225, 52);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(87, 28);
-			this.label4.TabIndex = 0;
-			this.label4.Text = "到期日";
-			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelTransferDay.Location = new System.Drawing.Point(225, 49);
+			this.labelTransferDay.Name = "labelTransferDay";
+			this.labelTransferDay.Size = new System.Drawing.Size(87, 30);
+			this.labelTransferDay.TabIndex = 0;
+			this.labelTransferDay.Text = "到期日";
+			this.labelTransferDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label5
+			// labelDueDay
 			// 
-			this.label5.Location = new System.Drawing.Point(1, 97);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(87, 28);
-			this.label5.TabIndex = 0;
-			this.label5.Text = "转让日";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelDueDay.Location = new System.Drawing.Point(1, 87);
+			this.labelDueDay.Name = "labelDueDay";
+			this.labelDueDay.Size = new System.Drawing.Size(87, 30);
+			this.labelDueDay.TabIndex = 0;
+			this.labelDueDay.Text = "转让日";
+			this.labelDueDay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label6
+			// labelInterestRate
 			// 
-			this.label6.Location = new System.Drawing.Point(225, 97);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(87, 28);
-			this.label6.TabIndex = 0;
-			this.label6.Text = "原年化利率";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelInterestRate.Location = new System.Drawing.Point(225, 86);
+			this.labelInterestRate.Name = "labelInterestRate";
+			this.labelInterestRate.Size = new System.Drawing.Size(87, 30);
+			this.labelInterestRate.TabIndex = 0;
+			this.labelInterestRate.Text = "原年化利率";
+			this.labelInterestRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label7
+			// labelInterest
 			// 
-			this.label7.Location = new System.Drawing.Point(3, 20);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(87, 28);
-			this.label7.TabIndex = 0;
-			this.label7.Text = "已收利息";
-			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelInterest.Location = new System.Drawing.Point(3, 42);
+			this.labelInterest.Name = "labelInterest";
+			this.labelInterest.Size = new System.Drawing.Size(87, 30);
+			this.labelInterest.TabIndex = 0;
+			this.labelInterest.Text = "已收利息";
+			this.labelInterest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label8
+			// labelRemainInterest
 			// 
-			this.label8.Location = new System.Drawing.Point(227, 20);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(87, 28);
-			this.label8.TabIndex = 0;
-			this.label8.Text = "未收利息";
-			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelRemainInterest.Location = new System.Drawing.Point(227, 42);
+			this.labelRemainInterest.Name = "labelRemainInterest";
+			this.labelRemainInterest.Size = new System.Drawing.Size(87, 30);
+			this.labelRemainInterest.TabIndex = 0;
+			this.labelRemainInterest.Text = "未收利息";
+			this.labelRemainInterest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label9
+			// labelDiscountGold
 			// 
-			this.label9.Location = new System.Drawing.Point(13, 25);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(81, 28);
-			this.label9.TabIndex = 0;
-			this.label9.Text = "折让金";
-			this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelDiscountGold.Location = new System.Drawing.Point(13, 27);
+			this.labelDiscountGold.Name = "labelDiscountGold";
+			this.labelDiscountGold.Size = new System.Drawing.Size(81, 30);
+			this.labelDiscountGold.TabIndex = 0;
+			this.labelDiscountGold.Text = "折让金";
+			this.labelDiscountGold.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label10
+			// labelCreditorBenefitRate
 			// 
-			this.label10.Location = new System.Drawing.Point(13, 79);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(81, 28);
-			this.label10.TabIndex = 0;
-			this.label10.Text = "原债权人受益";
-			this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelCreditorBenefitRate.Location = new System.Drawing.Point(13, 86);
+			this.labelCreditorBenefitRate.Name = "labelCreditorBenefitRate";
+			this.labelCreditorBenefitRate.Size = new System.Drawing.Size(81, 30);
+			this.labelCreditorBenefitRate.TabIndex = 0;
+			this.labelCreditorBenefitRate.Text = "原债权人受益";
+			this.labelCreditorBenefitRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// label11
+			// labelInvestorBenefitRate
 			// 
-			this.label11.Location = new System.Drawing.Point(11, 135);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(83, 28);
-			this.label11.TabIndex = 0;
-			this.label11.Text = "投资人收益";
-			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelInvestorBenefitRate.Location = new System.Drawing.Point(11, 146);
+			this.labelInvestorBenefitRate.Name = "labelInvestorBenefitRate";
+			this.labelInvestorBenefitRate.Size = new System.Drawing.Size(83, 30);
+			this.labelInvestorBenefitRate.TabIndex = 0;
+			this.labelInvestorBenefitRate.Text = "投资人收益";
+			this.labelInvestorBenefitRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
-			// dateTimePicker1
+			// dateTimePickerValueDay
 			// 
-			this.dateTimePicker1.Location = new System.Drawing.Point(110, 56);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.Size = new System.Drawing.Size(109, 21);
-			this.dateTimePicker1.TabIndex = 1;
-			this.dateTimePicker1.Leave += new System.EventHandler(this.dateTimePicker1_Leave);
+			this.dateTimePickerValueDay.Location = new System.Drawing.Point(110, 54);
+			this.dateTimePickerValueDay.Name = "dateTimePickerValueDay";
+			this.dateTimePickerValueDay.Size = new System.Drawing.Size(109, 20);
+			this.dateTimePickerValueDay.TabIndex = 1;
+			this.dateTimePickerValueDay.Leave += new System.EventHandler(this.dateTimePickerValueDay_Leave);
 			// 
-			// dateTimePicker2
+			// dateTimePickerDueDay
 			// 
-			this.dateTimePicker2.Location = new System.Drawing.Point(318, 56);
-			this.dateTimePicker2.Name = "dateTimePicker2";
-			this.dateTimePicker2.Size = new System.Drawing.Size(109, 21);
-			this.dateTimePicker2.TabIndex = 1;
-			this.dateTimePicker2.Leave += new System.EventHandler(this.dateTimePicker2_Leave);
+			this.dateTimePickerDueDay.Location = new System.Drawing.Point(318, 54);
+			this.dateTimePickerDueDay.Name = "dateTimePickerDueDay";
+			this.dateTimePickerDueDay.Size = new System.Drawing.Size(109, 20);
+			this.dateTimePickerDueDay.TabIndex = 1;
+			this.dateTimePickerDueDay.Leave += new System.EventHandler(this.dateTimePickerDueDay_Leave);
 			// 
-			// dateTimePicker3
+			// dateTimePickerTransferDay
 			// 
-			this.dateTimePicker3.Location = new System.Drawing.Point(110, 99);
-			this.dateTimePicker3.Name = "dateTimePicker3";
-			this.dateTimePicker3.Size = new System.Drawing.Size(109, 21);
-			this.dateTimePicker3.TabIndex = 1;
-			this.dateTimePicker3.Leave += new System.EventHandler(this.dateTimePicker3_Leave);
+			this.dateTimePickerTransferDay.Location = new System.Drawing.Point(110, 93);
+			this.dateTimePickerTransferDay.Name = "dateTimePickerTransferDay";
+			this.dateTimePickerTransferDay.Size = new System.Drawing.Size(109, 20);
+			this.dateTimePickerTransferDay.TabIndex = 1;
+			this.dateTimePickerTransferDay.Leave += new System.EventHandler(this.dateTimePickerTransferDay_Leave);
 			// 
-			// textBox1
+			// textBoxPrincipal
 			// 
-			this.textBox1.Location = new System.Drawing.Point(109, 17);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(109, 21);
-			this.textBox1.TabIndex = 0;
-			this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
-			this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+			this.textBoxPrincipal.Location = new System.Drawing.Point(109, 18);
+			this.textBoxPrincipal.Name = "textBoxPrincipal";
+			this.textBoxPrincipal.Size = new System.Drawing.Size(109, 20);
+			this.textBoxPrincipal.TabIndex = 0;
+			this.textBoxPrincipal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxPrincipal.Leave += new System.EventHandler(this.textBoxPrincipal_Leave);
+			this.textBoxPrincipal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPrincipal_KeyPress);
 			// 
-			// textBox2
+			// textBoxPoundage
 			// 
-			this.textBox2.Location = new System.Drawing.Point(318, 17);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(109, 21);
-			this.textBox2.TabIndex = 2;
-			this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
-			this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+			this.textBoxPoundage.Location = new System.Drawing.Point(318, 18);
+			this.textBoxPoundage.Name = "textBoxPoundage";
+			this.textBoxPoundage.Size = new System.Drawing.Size(87, 20);
+			this.textBoxPoundage.TabIndex = 2;
+			this.textBoxPoundage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxPoundage.Leave += new System.EventHandler(this.textBoxPoundage_Leave);
+			this.textBoxPoundage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPoundage_KeyPress);
 			// 
-			// textBox3
+			// textBoxInterestRate
 			// 
-			this.textBox3.Location = new System.Drawing.Point(318, 98);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(109, 21);
-			this.textBox3.TabIndex = 2;
-			this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.textBox3.Leave += new System.EventHandler(this.textBox3_Leave);
-			this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
+			this.textBoxInterestRate.Location = new System.Drawing.Point(318, 92);
+			this.textBoxInterestRate.Name = "textBoxInterestRate";
+			this.textBoxInterestRate.Size = new System.Drawing.Size(87, 20);
+			this.textBoxInterestRate.TabIndex = 2;
+			this.textBoxInterestRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxInterestRate.Leave += new System.EventHandler(this.textBoxInterestRate_Leave);
+			this.textBoxInterestRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInterestRate_KeyPress);
 			// 
-			// textBox4
+			// textBoxInterest
 			// 
-			this.textBox4.Location = new System.Drawing.Point(111, 25);
-			this.textBox4.Name = "textBox4";
-			this.textBox4.Size = new System.Drawing.Size(109, 21);
-			this.textBox4.TabIndex = 2;
-			this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.textBox4.Leave += new System.EventHandler(this.textBox4_Leave);
-			this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
+			this.textBoxInterest.Location = new System.Drawing.Point(111, 47);
+			this.textBoxInterest.Name = "textBoxInterest";
+			this.textBoxInterest.Size = new System.Drawing.Size(109, 20);
+			this.textBoxInterest.TabIndex = 2;
+			this.textBoxInterest.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxInterest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInterest_KeyPress);
 			// 
-			// textBox5
+			// textBoxRemainInterest
 			// 
-			this.textBox5.Location = new System.Drawing.Point(320, 25);
-			this.textBox5.Name = "textBox5";
-			this.textBox5.Size = new System.Drawing.Size(109, 21);
-			this.textBox5.TabIndex = 2;
-			this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.textBox5.Leave += new System.EventHandler(this.textBox5_Leave);
-			this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
+			this.textBoxRemainInterest.Location = new System.Drawing.Point(320, 47);
+			this.textBoxRemainInterest.Name = "textBoxRemainInterest";
+			this.textBoxRemainInterest.Size = new System.Drawing.Size(109, 20);
+			this.textBoxRemainInterest.TabIndex = 2;
+			this.textBoxRemainInterest.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxRemainInterest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxRemainInterest_KeyPress);
 			// 
-			// textBox6
+			// textBoxDiscountGold
 			// 
-			this.textBox6.Location = new System.Drawing.Point(115, 30);
-			this.textBox6.Name = "textBox6";
-			this.textBox6.Size = new System.Drawing.Size(109, 21);
-			this.textBox6.TabIndex = 2;
-			this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxDiscountGold.Location = new System.Drawing.Point(115, 33);
+			this.textBoxDiscountGold.Name = "textBoxDiscountGold";
+			this.textBoxDiscountGold.Size = new System.Drawing.Size(109, 20);
+			this.textBoxDiscountGold.TabIndex = 2;
+			this.textBoxDiscountGold.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
-			// textBox7
+			// textBoxCreditorBenefitRate
 			// 
-			this.textBox7.Location = new System.Drawing.Point(115, 84);
-			this.textBox7.Name = "textBox7";
-			this.textBox7.Size = new System.Drawing.Size(109, 21);
-			this.textBox7.TabIndex = 2;
-			this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxCreditorBenefitRate.Location = new System.Drawing.Point(115, 91);
+			this.textBoxCreditorBenefitRate.Name = "textBoxCreditorBenefitRate";
+			this.textBoxCreditorBenefitRate.Size = new System.Drawing.Size(90, 20);
+			this.textBoxCreditorBenefitRate.TabIndex = 2;
+			this.textBoxCreditorBenefitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
-			// textBox8
+			// textBoxInvestorBenefitRate
 			// 
-			this.textBox8.Location = new System.Drawing.Point(115, 140);
-			this.textBox8.Name = "textBox8";
-			this.textBox8.Size = new System.Drawing.Size(109, 21);
-			this.textBox8.TabIndex = 2;
-			this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxInvestorBenefitRate.Location = new System.Drawing.Point(115, 152);
+			this.textBoxInvestorBenefitRate.Name = "textBoxInvestorBenefitRate";
+			this.textBoxInvestorBenefitRate.Size = new System.Drawing.Size(90, 20);
+			this.textBoxInvestorBenefitRate.TabIndex = 2;
+			this.textBoxInvestorBenefitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
-			// button1
+			// buttonCalcByDiscountGold
 			// 
-			this.button1.Location = new System.Drawing.Point(259, 30);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(57, 22);
-			this.button1.TabIndex = 3;
-			this.button1.Text = "Calc";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.buttonCalcByDiscountGold.Location = new System.Drawing.Point(259, 33);
+			this.buttonCalcByDiscountGold.Name = "buttonCalcByDiscountGold";
+			this.buttonCalcByDiscountGold.Size = new System.Drawing.Size(57, 24);
+			this.buttonCalcByDiscountGold.TabIndex = 3;
+			this.buttonCalcByDiscountGold.Text = "Calc";
+			this.buttonCalcByDiscountGold.UseVisualStyleBackColor = true;
+			this.buttonCalcByDiscountGold.Click += new System.EventHandler(this.buttonCalcByDiscountGold_Click);
 			// 
-			// button2
+			// buttoCalcByCreditorBenefitRate
 			// 
-			this.button2.Location = new System.Drawing.Point(259, 82);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(57, 22);
-			this.button2.TabIndex = 3;
-			this.button2.Text = "Calc";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
+			this.buttoCalcByCreditorBenefitRate.Location = new System.Drawing.Point(259, 89);
+			this.buttoCalcByCreditorBenefitRate.Name = "buttoCalcByCreditorBenefitRate";
+			this.buttoCalcByCreditorBenefitRate.Size = new System.Drawing.Size(57, 24);
+			this.buttoCalcByCreditorBenefitRate.TabIndex = 3;
+			this.buttoCalcByCreditorBenefitRate.Text = "Calc";
+			this.buttoCalcByCreditorBenefitRate.UseVisualStyleBackColor = true;
+			this.buttoCalcByCreditorBenefitRate.Click += new System.EventHandler(this.buttoCalcByCreditorBenefitRate_Click);
 			// 
-			// button3
+			// buttonCalcByInvestorBenefitRate
 			// 
-			this.button3.Location = new System.Drawing.Point(259, 138);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(57, 22);
-			this.button3.TabIndex = 3;
-			this.button3.Text = "Calc";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.buttonCalcByInvestorBenefitRate.Location = new System.Drawing.Point(259, 150);
+			this.buttonCalcByInvestorBenefitRate.Name = "buttonCalcByInvestorBenefitRate";
+			this.buttonCalcByInvestorBenefitRate.Size = new System.Drawing.Size(57, 24);
+			this.buttonCalcByInvestorBenefitRate.TabIndex = 3;
+			this.buttonCalcByInvestorBenefitRate.Text = "Calc";
+			this.buttonCalcByInvestorBenefitRate.UseVisualStyleBackColor = true;
+			this.buttonCalcByInvestorBenefitRate.Click += new System.EventHandler(this.buttonCalcByInvestorBenefitRate_Click);
 			// 
-			// button4
+			// buttonReset
 			// 
-			this.button4.Location = new System.Drawing.Point(337, 445);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(114, 39);
-			this.button4.TabIndex = 4;
-			this.button4.Text = "初始化";
-			this.button4.UseVisualStyleBackColor = true;
-			this.button4.Click += new System.EventHandler(this.button4_Click);
+			this.buttonReset.Location = new System.Drawing.Point(337, 482);
+			this.buttonReset.Name = "buttonReset";
+			this.buttonReset.Size = new System.Drawing.Size(114, 42);
+			this.buttonReset.TabIndex = 4;
+			this.buttonReset.Text = "初始化";
+			this.buttonReset.UseVisualStyleBackColor = true;
+			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.button3);
-			this.groupBox1.Controls.Add(this.button2);
-			this.groupBox1.Controls.Add(this.button1);
-			this.groupBox1.Controls.Add(this.textBox8);
-			this.groupBox1.Controls.Add(this.textBox7);
-			this.groupBox1.Controls.Add(this.textBox6);
-			this.groupBox1.Controls.Add(this.label11);
-			this.groupBox1.Controls.Add(this.label10);
-			this.groupBox1.Controls.Add(this.label9);
-			this.groupBox1.Location = new System.Drawing.Point(23, 236);
+			this.groupBox1.Controls.Add(this.label4);
+			this.groupBox1.Controls.Add(this.label3);
+			this.groupBox1.Controls.Add(this.buttonCalcByInvestorBenefitRate);
+			this.groupBox1.Controls.Add(this.buttoCalcByCreditorBenefitRate);
+			this.groupBox1.Controls.Add(this.buttonCalcByDiscountGold);
+			this.groupBox1.Controls.Add(this.textBoxInvestorBenefitRate);
+			this.groupBox1.Controls.Add(this.textBoxCreditorBenefitRate);
+			this.groupBox1.Controls.Add(this.textBoxDiscountGold);
+			this.groupBox1.Controls.Add(this.labelInvestorBenefitRate);
+			this.groupBox1.Controls.Add(this.labelCreditorBenefitRate);
+			this.groupBox1.Controls.Add(this.labelDiscountGold);
+			this.groupBox1.Location = new System.Drawing.Point(23, 256);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(443, 190);
+			this.groupBox1.Size = new System.Drawing.Size(443, 206);
 			this.groupBox1.TabIndex = 5;
 			this.groupBox1.TabStop = false;
 			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(205, 155);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(15, 13);
+			this.label4.TabIndex = 3;
+			this.label4.Text = "%";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(207, 94);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(15, 13);
+			this.label3.TabIndex = 3;
+			this.label3.Text = "%";
+			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.textBox5);
-			this.groupBox2.Controls.Add(this.textBox4);
-			this.groupBox2.Controls.Add(this.label8);
-			this.groupBox2.Controls.Add(this.label7);
-			this.groupBox2.Location = new System.Drawing.Point(23, 165);
+			this.groupBox2.Controls.Add(this.textBoxRemainInterest);
+			this.groupBox2.Controls.Add(this.textBoxTotalInterest);
+			this.groupBox2.Controls.Add(this.textBoxInterest);
+			this.groupBox2.Controls.Add(this.labelRemainInterest);
+			this.groupBox2.Controls.Add(this.labelTotalInterest);
+			this.groupBox2.Controls.Add(this.labelInterest);
+			this.groupBox2.Location = new System.Drawing.Point(23, 179);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(442, 71);
+			this.groupBox2.Size = new System.Drawing.Size(442, 77);
 			this.groupBox2.TabIndex = 6;
 			this.groupBox2.TabStop = false;
 			// 
+			// textBoxTotalInterest
+			// 
+			this.textBoxTotalInterest.Location = new System.Drawing.Point(111, 22);
+			this.textBoxTotalInterest.Name = "textBoxTotalInterest";
+			this.textBoxTotalInterest.Size = new System.Drawing.Size(109, 20);
+			this.textBoxTotalInterest.TabIndex = 2;
+			this.textBoxTotalInterest.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxTotalInterest.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTotalInterest_KeyPress);
+			// 
+			// labelTotalInterest
+			// 
+			this.labelTotalInterest.Location = new System.Drawing.Point(3, 12);
+			this.labelTotalInterest.Name = "labelTotalInterest";
+			this.labelTotalInterest.Size = new System.Drawing.Size(87, 30);
+			this.labelTotalInterest.TabIndex = 0;
+			this.labelTotalInterest.Text = "总利息";
+			this.labelTotalInterest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// groupBox3
 			// 
-			this.groupBox3.Controls.Add(this.textBox3);
-			this.groupBox3.Controls.Add(this.textBox2);
-			this.groupBox3.Controls.Add(this.textBox1);
-			this.groupBox3.Controls.Add(this.dateTimePicker3);
-			this.groupBox3.Controls.Add(this.dateTimePicker2);
-			this.groupBox3.Controls.Add(this.dateTimePicker1);
+			this.groupBox3.Controls.Add(this.textBoxGainInterestDayMonthly);
 			this.groupBox3.Controls.Add(this.label2);
-			this.groupBox3.Controls.Add(this.label6);
-			this.groupBox3.Controls.Add(this.label5);
-			this.groupBox3.Controls.Add(this.label4);
-			this.groupBox3.Controls.Add(this.label3);
 			this.groupBox3.Controls.Add(this.label1);
-			this.groupBox3.Location = new System.Drawing.Point(25, 16);
+			this.groupBox3.Controls.Add(this.textBoxInterestRate);
+			this.groupBox3.Controls.Add(this.textBoxPoundage);
+			this.groupBox3.Controls.Add(this.textBoxPrincipal);
+			this.groupBox3.Controls.Add(this.dateTimePickerTransferDay);
+			this.groupBox3.Controls.Add(this.dateTimePickerDueDay);
+			this.groupBox3.Controls.Add(this.dateTimePickerValueDay);
+			this.groupBox3.Controls.Add(this.labelPoundage);
+			this.groupBox3.Controls.Add(this.labelInterestRate);
+			this.groupBox3.Controls.Add(this.labelTransferDay);
+			this.groupBox3.Controls.Add(this.labelValueDay);
+			this.groupBox3.Controls.Add(this.label5);
+			this.groupBox3.Controls.Add(this.labelDueDay);
+			this.groupBox3.Controls.Add(this.labelPrincipal);
+			this.groupBox3.Location = new System.Drawing.Point(25, 17);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(440, 149);
+			this.groupBox3.Size = new System.Drawing.Size(440, 161);
 			this.groupBox3.TabIndex = 7;
 			this.groupBox3.TabStop = false;
 			// 
+			// textBoxGainInterestDayMonthly
+			// 
+			this.textBoxGainInterestDayMonthly.Location = new System.Drawing.Point(109, 132);
+			this.textBoxGainInterestDayMonthly.Name = "textBoxGainInterestDayMonthly";
+			this.textBoxGainInterestDayMonthly.Size = new System.Drawing.Size(110, 20);
+			this.textBoxGainInterestDayMonthly.TabIndex = 4;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(408, 95);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(15, 13);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "%";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(408, 21);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(15, 13);
+			this.label1.TabIndex = 3;
+			this.label1.Text = "%";
+			// 
+			// label5
+			// 
+			this.label5.Location = new System.Drawing.Point(1, 126);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(87, 30);
+			this.label5.TabIndex = 0;
+			this.label5.Text = "月还息日";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(509, 525);
+			this.ClientSize = new System.Drawing.Size(509, 569);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.button4);
+			this.Controls.Add(this.buttonReset);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
@@ -372,35 +456,43 @@
 
 		#endregion
 
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
-		private System.Windows.Forms.DateTimePicker dateTimePicker2;
-		private System.Windows.Forms.DateTimePicker dateTimePicker3;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.TextBox textBox4;
-		private System.Windows.Forms.TextBox textBox5;
-		private System.Windows.Forms.TextBox textBox6;
-		private System.Windows.Forms.TextBox textBox7;
-		private System.Windows.Forms.TextBox textBox8;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Label labelPrincipal;
+		private System.Windows.Forms.Label labelPoundage;
+		private System.Windows.Forms.Label labelValueDay;
+		private System.Windows.Forms.Label labelTransferDay;
+		private System.Windows.Forms.Label labelDueDay;
+		private System.Windows.Forms.Label labelInterestRate;
+		private System.Windows.Forms.Label labelInterest;
+		private System.Windows.Forms.Label labelRemainInterest;
+		private System.Windows.Forms.Label labelDiscountGold;
+		private System.Windows.Forms.Label labelCreditorBenefitRate;
+		private System.Windows.Forms.Label labelInvestorBenefitRate;
+		private System.Windows.Forms.DateTimePicker dateTimePickerValueDay;
+		private System.Windows.Forms.DateTimePicker dateTimePickerDueDay;
+		private System.Windows.Forms.DateTimePicker dateTimePickerTransferDay;
+		private System.Windows.Forms.TextBox textBoxPrincipal;
+		private System.Windows.Forms.TextBox textBoxPoundage;
+		private System.Windows.Forms.TextBox textBoxInterestRate;
+		private System.Windows.Forms.TextBox textBoxInterest;
+		private System.Windows.Forms.TextBox textBoxRemainInterest;
+		private System.Windows.Forms.TextBox textBoxDiscountGold;
+		private System.Windows.Forms.TextBox textBoxCreditorBenefitRate;
+		private System.Windows.Forms.TextBox textBoxInvestorBenefitRate;
+		private System.Windows.Forms.Button buttonCalcByDiscountGold;
+		private System.Windows.Forms.Button buttoCalcByCreditorBenefitRate;
+		private System.Windows.Forms.Button buttonCalcByInvestorBenefitRate;
+		private System.Windows.Forms.Button buttonReset;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label labelTotalInterest;
+		private System.Windows.Forms.TextBox textBoxTotalInterest;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox textBoxGainInterestDayMonthly;
 	}
 }
 
