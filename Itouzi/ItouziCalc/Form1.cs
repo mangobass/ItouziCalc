@@ -14,7 +14,7 @@ namespace ItouziCalc
 		public Form1()
 		{
 			InitializeComponent();
-			InitForTest();
+			//InitForTest();
 		}
 
 		private void InitForTest()
@@ -22,7 +22,7 @@ namespace ItouziCalc
 			this.dateTimePickerValueDay.Value = new System.DateTime(2013, 12, 10);
 			this.dateTimePickerDueDay.Value = new System.DateTime(2014, 10, 9);
 			this.textBoxPrincipal.Text = "10000";
-			this.textBoxGainInterestDayMonthly.Text = "31";
+			this.textBoxGainInterestDayPerMonth.Text = "31";
 			this.textBoxInterestRate.Text = "14";
 		}
 
@@ -114,19 +114,16 @@ namespace ItouziCalc
 
 		private void dateTimePickerValueDay_Leave(object sender, EventArgs e)
 		{
-			DateTime tm = dateTimePickerValueDay.Value;
 			calcInterest();
 		}
 
 		private void dateTimePickerDueDay_Leave(object sender, EventArgs e)
 		{
-			DateTime tm = dateTimePickerDueDay.Value;
 			calcInterest();
 		}
 
 		private void dateTimePickerTransferDay_Leave(object sender, EventArgs e)
 		{
-			DateTime tm = dateTimePickerTransferDay.Value;
 			calcInterest();
 		}
 
@@ -283,7 +280,8 @@ namespace ItouziCalc
 		private void calcInterest()
 		{
 			if (textBoxPrincipal.Text != "" &&
-				textBoxInterestRate.Text != "")
+				textBoxInterestRate.Text != "" &&
+				textBoxGainInterestDayPerMonth.Text != "")
 			{
 				double principle = double.Parse(textBoxPrincipal.Text);
 				if (principle > 0.0)
@@ -326,72 +324,14 @@ namespace ItouziCalc
 			calcInterest();
 		}
 
-		private int GetActualInterestDays()
-		{
-			DateTime startTime = dateTimePickerValueDay.Value;
-			int totalDays = getValueDateToTransferDate();
-			int actualDaysTmp = 0;
-			int actualDays = 0;
-			int monthBegin = startTime.Month;
-
-			while (true)
-			{
-				switch (startTime.Month)
-				{
-				case 1:
-				case 3:
-				case 5:
-				case 7:
-				case 8:
-				case 10:
-				case 12:
-					actualDaysTmp += 31;
-					totalDays -= 31;
-					break;
-				case 4:
-				case 6:
-				case 9:
-				case 11:
-					actualDaysTmp += 30;
-					totalDays -= 30;
-					break;
-				case 2:
-					if (DateTime.IsLeapYear(startTime.Year))
-					{
-						actualDaysTmp += 29;
-						totalDays -= 29;
-					}
-					else
-					{
-						actualDaysTmp += 28;
-						totalDays -= 28;
-					}
-					break;
-				}
-				if (totalDays >= 0)
-				{
-					startTime = startTime.AddMonths(1);
-					actualDays = actualDaysTmp;
-				}
-				else
-				{
-					break;
-				}
-			}
-			return actualDays;
-		}
-
 		private int GetDaysByYearMonth(int year, int month)
 		{
 			switch (month)
 			{
 			case 2:
-				if (DateTime.IsLeapYear(year))
-				{
+				if (DateTime.IsLeapYear(year)) {
 					return 29;
-				}
-				else
-				{
+				} else {
 					return 28;
 				}
 			case 1:
@@ -426,7 +366,7 @@ namespace ItouziCalc
 		{
 			DateTime valueDate = dateTimePickerValueDay.Value; //起息日
 			DateTime repaymentDate = dateTimePickerDueDay.Value; //还款日
-			int interestPaymentDayPerMonth = int.Parse(textBoxGainInterestDayMonthly.Text); //月还息日
+			int interestPaymentDayPerMonth = int.Parse(textBoxGainInterestDayPerMonth.Text); //月还息日
 			DateTime interestPaymentDate = GetNextInterestPaymentDate(valueDate, interestPaymentDayPerMonth, repaymentDate);
 			List<DateTime> interestPaymentDateTable = new List<DateTime>();
 			if (interestPaymentDate.Subtract(repaymentDate).Days < 0)
@@ -497,6 +437,11 @@ namespace ItouziCalc
 		private double CalcInterestValue(int days)
 		{
 			return GetDailyInterest() * days;
+		}
+
+		private void textBoxGainInterestDayPerMonth_Leave(object sender, EventArgs e)
+		{
+			calcInterest();
 		}
 	}
 }
