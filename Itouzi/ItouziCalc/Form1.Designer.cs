@@ -404,6 +404,7 @@
 			this.textBoxGainInterestDayMonthly.Name = "textBoxGainInterestDayMonthly";
 			this.textBoxGainInterestDayMonthly.Size = new System.Drawing.Size(110, 20);
 			this.textBoxGainInterestDayMonthly.TabIndex = 4;
+			this.textBoxGainInterestDayMonthly.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
 			// label2
 			// 

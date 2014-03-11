@@ -9,20 +9,18 @@ using System.Windows.Forms;
 
 namespace ItouziCalc
 {
-
 	public partial class Form1 : Form
 	{
 		public Form1()
 		{
 			InitializeComponent();
-			m_MonthlyInterestInfoList = new List<InterestPaymentInfo>();
 			InitForTest();
 		}
 
 		private void InitForTest()
 		{
-			this.dateTimePickerValueDay.Value = new System.DateTime(2013, 11, 30);
-			this.dateTimePickerDueDay.Value = new System.DateTime(2014, 9, 25);
+			this.dateTimePickerValueDay.Value = new System.DateTime(2013, 12, 10);
+			this.dateTimePickerDueDay.Value = new System.DateTime(2014, 10, 9);
 			this.textBoxPrincipal.Text = "10000";
 			this.textBoxGainInterestDayMonthly.Text = "31";
 			this.textBoxInterestRate.Text = "14";
@@ -112,13 +110,6 @@ namespace ItouziCalc
 			TimeSpan tmSpan = newTmDueDate.Subtract(newTmTransferDate);
 
 			return tmSpan.Days < 0 ? 0 : tmSpan.Days;
-		}
-
-		private List<InterestPaymentInfo> m_MonthlyInterestInfoList;
-
-		private void CalcMonthlyInterestTable()
-		{
-			m_MonthlyInterestInfoList = GetInterestPaymentInfoTable();
 		}
 
 		private void dateTimePickerValueDay_Leave(object sender, EventArgs e)
@@ -297,7 +288,7 @@ namespace ItouziCalc
 				double principle = double.Parse(textBoxPrincipal.Text);
 				if (principle > 0.0)
 				{
-					double gainInterest = getGainInterest(principle);
+					double gainInterest = getGainInterest();
 					double totalInterest = getTotalInterest();
 					textBoxTotalInterest.Text = totalInterest.ToString("0.00");
 					textBoxInterest.Text = gainInterest.ToString("0.00");
@@ -306,9 +297,18 @@ namespace ItouziCalc
 			}
 		}
 
-		private double getGainInterest(double principle)
+		private double getGainInterest()
 		{
-			return GetActualInterestDays() * GetDailyInterest();
+			List<InterestPaymentInfo> monthlyInterestInfoList = GetInterestPaymentInfoTable();
+			double totalInterest = 0.0;
+			foreach (InterestPaymentInfo item in monthlyInterestInfoList)
+			{
+				if ((item.m_InterestPaymentDate.Subtract(dateTimePickerTransferDay.Value)).Days <= 0)
+				{
+					totalInterest += item.m_InterestValue;
+				}
+			}
+			return totalInterest;
 		}
 
 		private void textBoxPrincipal_Leave(object sender, EventArgs e)
@@ -491,15 +491,6 @@ namespace ItouziCalc
 
 				lastInterestPaymentDate = item;
 			}
-			//for (int i = 0; i < interestPaymentDateTable.c; i++)
-			//{
-			//    InterestPaymentInfo interestPaymentInfo;
-			//    interestPaymentInfo.m_InterestPaymentDate = interestPaymentDateTable[i];
-			//    interestPaymentInfo.m_InterestValue = CalcInterestValue(interestPaymentDateTable[i] - lastInterestPaymentDate);
-			//    interestPaymentInfoTable.Add(interestPaymentInfo);
-
-			//    lastInterestPaymentDate = interestPaymentDateTable[i];
-			//}
 			return interestPaymentInfoTable;
 		}
 
