@@ -50,10 +50,6 @@
 			this.textBoxDiscountGold = new System.Windows.Forms.TextBox();
 			this.textBoxCreditorBenefitRate = new System.Windows.Forms.TextBox();
 			this.textBoxInvestorBenefitRate = new System.Windows.Forms.TextBox();
-			this.buttonCalcByDiscountGold = new System.Windows.Forms.Button();
-			this.buttoCalcByCreditorBenefitRate = new System.Windows.Forms.Button();
-			this.buttonCalcByInvestorBenefitRate = new System.Windows.Forms.Button();
-			this.buttonReset = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
@@ -201,6 +197,7 @@
 			this.textBoxPrincipal.TabIndex = 0;
 			this.textBoxPrincipal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.textBoxPrincipal.Leave += new System.EventHandler(this.textBoxPrincipal_Leave);
+			this.textBoxPrincipal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPrincipal_KeyUp);
 			this.textBoxPrincipal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPrincipal_KeyPress);
 			// 
 			// textBoxPoundage
@@ -222,6 +219,7 @@
 			this.textBoxInterestRate.TabIndex = 2;
 			this.textBoxInterestRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.textBoxInterestRate.Leave += new System.EventHandler(this.textBoxInterestRate_Leave);
+			this.textBoxInterestRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxInterestRate_KeyUp);
 			this.textBoxInterestRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInterestRate_KeyPress);
 			// 
 			// textBoxInterest
@@ -249,6 +247,7 @@
 			this.textBoxDiscountGold.Size = new System.Drawing.Size(109, 21);
 			this.textBoxDiscountGold.TabIndex = 2;
 			this.textBoxDiscountGold.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxDiscountGold.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxDiscountGold_KeyUp);
 			// 
 			// textBoxCreditorBenefitRate
 			// 
@@ -257,6 +256,7 @@
 			this.textBoxCreditorBenefitRate.Size = new System.Drawing.Size(90, 21);
 			this.textBoxCreditorBenefitRate.TabIndex = 2;
 			this.textBoxCreditorBenefitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.textBoxCreditorBenefitRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxCreditorBenefitRate_KeyUp);
 			// 
 			// textBoxInvestorBenefitRate
 			// 
@@ -265,55 +265,12 @@
 			this.textBoxInvestorBenefitRate.Size = new System.Drawing.Size(90, 21);
 			this.textBoxInvestorBenefitRate.TabIndex = 2;
 			this.textBoxInvestorBenefitRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			// 
-			// buttonCalcByDiscountGold
-			// 
-			this.buttonCalcByDiscountGold.Location = new System.Drawing.Point(259, 30);
-			this.buttonCalcByDiscountGold.Name = "buttonCalcByDiscountGold";
-			this.buttonCalcByDiscountGold.Size = new System.Drawing.Size(57, 22);
-			this.buttonCalcByDiscountGold.TabIndex = 3;
-			this.buttonCalcByDiscountGold.Text = "Calc";
-			this.buttonCalcByDiscountGold.UseVisualStyleBackColor = true;
-			this.buttonCalcByDiscountGold.Click += new System.EventHandler(this.buttonCalcByDiscountGold_Click);
-			// 
-			// buttoCalcByCreditorBenefitRate
-			// 
-			this.buttoCalcByCreditorBenefitRate.Location = new System.Drawing.Point(259, 82);
-			this.buttoCalcByCreditorBenefitRate.Name = "buttoCalcByCreditorBenefitRate";
-			this.buttoCalcByCreditorBenefitRate.Size = new System.Drawing.Size(57, 22);
-			this.buttoCalcByCreditorBenefitRate.TabIndex = 3;
-			this.buttoCalcByCreditorBenefitRate.Text = "Calc";
-			this.buttoCalcByCreditorBenefitRate.UseVisualStyleBackColor = true;
-			this.buttoCalcByCreditorBenefitRate.Click += new System.EventHandler(this.buttoCalcByCreditorBenefitRate_Click);
-			// 
-			// buttonCalcByInvestorBenefitRate
-			// 
-			this.buttonCalcByInvestorBenefitRate.Location = new System.Drawing.Point(259, 138);
-			this.buttonCalcByInvestorBenefitRate.Name = "buttonCalcByInvestorBenefitRate";
-			this.buttonCalcByInvestorBenefitRate.Size = new System.Drawing.Size(57, 22);
-			this.buttonCalcByInvestorBenefitRate.TabIndex = 3;
-			this.buttonCalcByInvestorBenefitRate.Text = "Calc";
-			this.buttonCalcByInvestorBenefitRate.UseVisualStyleBackColor = true;
-			this.buttonCalcByInvestorBenefitRate.Click += new System.EventHandler(this.buttonCalcByInvestorBenefitRate_Click);
-			// 
-			// buttonReset
-			// 
-			this.buttonReset.Location = new System.Drawing.Point(337, 445);
-			this.buttonReset.Name = "buttonReset";
-			this.buttonReset.Size = new System.Drawing.Size(114, 39);
-			this.buttonReset.TabIndex = 4;
-			this.buttonReset.Text = "初始化";
-			this.buttonReset.UseVisualStyleBackColor = true;
-			this.buttonReset.Visible = false;
-			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+			this.textBoxInvestorBenefitRate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxInvestorBenefitRate_KeyUp);
 			// 
 			// groupBox1
 			// 
 			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.label3);
-			this.groupBox1.Controls.Add(this.buttonCalcByInvestorBenefitRate);
-			this.groupBox1.Controls.Add(this.buttoCalcByCreditorBenefitRate);
-			this.groupBox1.Controls.Add(this.buttonCalcByDiscountGold);
 			this.groupBox1.Controls.Add(this.textBoxInvestorBenefitRate);
 			this.groupBox1.Controls.Add(this.textBoxCreditorBenefitRate);
 			this.groupBox1.Controls.Add(this.textBoxDiscountGold);
@@ -408,6 +365,8 @@
 			this.textBoxGainInterestDayPerMonth.TabIndex = 4;
 			this.textBoxGainInterestDayPerMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.textBoxGainInterestDayPerMonth.Leave += new System.EventHandler(this.textBoxGainInterestDayPerMonth_Leave);
+			this.textBoxGainInterestDayPerMonth.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxGainInterestDayPerMonth_KeyUp);
+			this.textBoxGainInterestDayPerMonth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxGainInterestDayPerMonth_KeyPress);
 			// 
 			// label2
 			// 
@@ -444,9 +403,8 @@
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.buttonReset);
 			this.Name = "Form1";
-			this.Text = "Itouzi收益计算器";
+			this.Text = "爱投资债权转让计算器v0.9";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -482,10 +440,6 @@
 		private System.Windows.Forms.TextBox textBoxDiscountGold;
 		private System.Windows.Forms.TextBox textBoxCreditorBenefitRate;
 		private System.Windows.Forms.TextBox textBoxInvestorBenefitRate;
-		private System.Windows.Forms.Button buttonCalcByDiscountGold;
-		private System.Windows.Forms.Button buttoCalcByCreditorBenefitRate;
-		private System.Windows.Forms.Button buttonCalcByInvestorBenefitRate;
-		private System.Windows.Forms.Button buttonReset;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.GroupBox groupBox3;
