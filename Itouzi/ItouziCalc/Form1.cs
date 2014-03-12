@@ -178,23 +178,21 @@ namespace ItouziCalc
 		private void calcDiscountGoldByCreditorBenifit()
 		{
 			double principal = double.Parse(textBoxPrincipal.Text);
-			double investmentTotalDateNum = getValueDateToDueDate();
 			double investmentDateNum = getValueDateToTransferDate();
 			double interest = double.Parse(textBoxInterest.Text);
 			double creditorBenefitRate = double.Parse(textBoxCreditorBenefitRate.Text) / 100.0;
 			double discountGold = 0;
-			discountGold = -((creditorBenefitRate * investmentDateNum / investmentTotalDateNum) * principal - interest + calcPoundage());
+			discountGold = -((creditorBenefitRate * investmentDateNum / 365) * principal - interest + calcPoundage());
 			textBoxDiscountGold.Text = discountGold.ToString("0.00");
 		}
 
 		private void calcDiscountGoldByInvestorBenifit()
 		{
 			double principal = double.Parse(textBoxPrincipal.Text);
-			double investmentTotalDateNum = getValueDateToDueDate();
 			double investmentRemainDateNum = GetTransferDateToDueDate();
 			double remainInterest = double.Parse(textBoxRemainInterest.Text);
 			double investorBenefitRate = double.Parse(textBoxInvestorBenefitRate.Text) / 100.0;
-			double tmp = investorBenefitRate * investmentRemainDateNum / investmentTotalDateNum;
+			double tmp = investorBenefitRate * investmentRemainDateNum / 365;
 			double discountGold = 0;
 			discountGold = (tmp * principal - remainInterest) / (tmp + 1);
 			textBoxDiscountGold.Text = discountGold.ToString("0.00");
