@@ -157,7 +157,7 @@
 			this.labelCreditorBenefitRate.Name = "labelCreditorBenefitRate";
 			this.labelCreditorBenefitRate.Size = new System.Drawing.Size(81, 28);
 			this.labelCreditorBenefitRate.TabIndex = 0;
-			this.labelCreditorBenefitRate.Text = "原债权人受益";
+			this.labelCreditorBenefitRate.Text = "原债权人收益";
 			this.labelCreditorBenefitRate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// labelInvestorBenefitRate
@@ -304,6 +304,7 @@
 			this.buttonReset.TabIndex = 4;
 			this.buttonReset.Text = "初始化";
 			this.buttonReset.UseVisualStyleBackColor = true;
+			this.buttonReset.Visible = false;
 			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
 			// 
 			// groupBox1
@@ -445,7 +446,7 @@
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.buttonReset);
 			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Text = "Itouzi收益计算器";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

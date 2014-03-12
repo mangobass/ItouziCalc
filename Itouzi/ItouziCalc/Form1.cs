@@ -326,6 +326,11 @@ namespace ItouziCalc
 			calcInterest();
 		}
 
+		private void textBoxGainInterestDayPerMonth_Leave(object sender, EventArgs e)
+		{
+			calcInterest();
+		}
+
 		private int GetDaysByYearMonth(int year, int month)
 		{
 			switch (month)
@@ -409,7 +414,7 @@ namespace ItouziCalc
 		private DateTime ReplaceMonthDay(DateTime date, int day)
 		{
 			int monthDays = GetDaysByYearMonth(date.Year, date.Month);
-			return new System.DateTime(date.Year, date.Month, day > monthDays ? monthDays : day);
+			return new System.DateTime(date.Year, date.Month, day > monthDays ? monthDays : day < 1 ? 1 : day);
 		}
 
 		struct InterestPaymentInfo
@@ -439,11 +444,6 @@ namespace ItouziCalc
 		private double CalcInterestValue(int days)
 		{
 			return GetDailyInterest() * days;
-		}
-
-		private void textBoxGainInterestDayPerMonth_Leave(object sender, EventArgs e)
-		{
-			calcInterest();
 		}
 	}
 }
