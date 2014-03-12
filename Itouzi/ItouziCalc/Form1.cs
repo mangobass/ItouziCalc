@@ -39,7 +39,7 @@ namespace ItouziCalc
 		// 判断输入的字符是否是数字或点（点只能出现一次），是的话返回true，不然返回false
 		private bool checkTextBoxNumberInput(TextBox obj, char c)
 		{
-			if ((c < 48 || c > 57) && c != 46)
+			if ((c < 48 || c > 57) && c != 46 && c != 8)
 			{
 				return false;
 			}
@@ -262,13 +262,17 @@ namespace ItouziCalc
 		private void buttonReset_Click(object sender, EventArgs e)
 		{
 			textBoxPrincipal.Text = "";
-			textBoxPoundage.Text = "";
 			textBoxInterestRate.Text = "";
 			textBoxInterest.Text = "";
 			textBoxRemainInterest.Text = "";
 			textBoxDiscountGold.Text = "";
 			textBoxCreditorBenefitRate.Text = "";
 			textBoxInvestorBenefitRate.Text = "";
+			textBoxTotalInterest.Text = "";
+
+			dateTimePickerValueDay.ResetText();
+			dateTimePickerDueDay.ResetText();
+			dateTimePickerTransferDay.ResetText();
 		}
 
 		private double getTotalInterest()
@@ -420,7 +424,7 @@ namespace ItouziCalc
 		{
 			List<InterestPaymentInfo> interestPaymentInfoTable = new List<InterestPaymentInfo>();
 			List<DateTime> interestPaymentDateTable = GetInterestPaymentDateTable();
-			DateTime lastInterestPaymentDate = dateTimePickerValueDay.Value; //起息日 , -1日?
+			DateTime lastInterestPaymentDate = (dateTimePickerValueDay.Value).AddDays(-1); //起息日 , -1日?
 
 			foreach (DateTime item in interestPaymentDateTable)
 			{
