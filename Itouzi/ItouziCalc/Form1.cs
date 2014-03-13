@@ -37,7 +37,7 @@ namespace ItouziCalc
 		}
 
 		// 判断输入的字符是否是数字或点（点只能出现一次），是的话返回true，不然返回false
-		private bool checkTextBoxNumberInput(TextBox obj, char c)
+		private bool CheckTextBoxNumberInput(TextBox obj, char c)
 		{
 			if ((c < 48 || c > 57) && c != 46 && c != 8)
 			{
@@ -54,7 +54,7 @@ namespace ItouziCalc
 		}
 
 		// 计算手续费
-		private double calcPoundage()
+		private double CalcPoundage()
 		{
 			double principle = 0.0;
 			float poundageRate = 0.0F;
@@ -66,8 +66,15 @@ namespace ItouziCalc
 			return 0.0;
 		}
 
+		private void ClearInterestInfo()
+		{
+			textBoxInterest.Text = "";
+			textBoxRemainInterest.Text = "";
+			textBoxTotalInterest.Text = "";
+		}
+
 		// value date   due date    transfer date
-		private int getValueDateToDueDate()
+		private int GetValueDateToDueDate()
 		{
 			DateTime tmValueDate = dateTimePickerValueDay.Value;
 			String valueDate = tmValueDate.Month.ToString() + "/" + tmValueDate.Day.ToString() + "/" + tmValueDate.Year.ToString() + " 00:00:00";
@@ -82,7 +89,7 @@ namespace ItouziCalc
 			return tmSpan.Days < 0 ? 0 : tmSpan.Days;
 		}
 
-		private int getValueDateToTransferDate()
+		private int GetValueDateToTransferDate()
 		{
 			DateTime tmValueDate = dateTimePickerValueDay.Value;
 			String valueDate = tmValueDate.Month.ToString() + "/" + tmValueDate.Day.ToString() + "/" + tmValueDate.Year.ToString() + " 00:00:00";
@@ -112,33 +119,9 @@ namespace ItouziCalc
 			return tmSpan.Days < 0 ? 0 : tmSpan.Days;
 		}
 
-		private void dateTimePickerValueDay_Leave(object sender, EventArgs e)
-		{
-			if (checkNeedCalcInterest())
-			{
-				calcInterest();
-			}
-		}
-
-		private void dateTimePickerDueDay_Leave(object sender, EventArgs e)
-		{
-			if (checkNeedCalcInterest())
-			{
-				calcInterest();
-			}
-		}
-
-		private void dateTimePickerTransferDay_Leave(object sender, EventArgs e)
-		{
-			if (checkNeedCalcInterest())
-			{
-				calcInterest();
-			}
-		}
-
 		private void textBoxPrincipal_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!checkTextBoxNumberInput(textBoxPrincipal, e.KeyChar))
+			if (!CheckTextBoxNumberInput(textBoxPrincipal, e.KeyChar))
 			{
 				e.Handled = true;
 			}
@@ -146,7 +129,7 @@ namespace ItouziCalc
 
 		private void textBoxPoundage_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!checkTextBoxNumberInput(textBoxPoundage, e.KeyChar))
+			if (!CheckTextBoxNumberInput(textBoxPoundage, e.KeyChar))
 			{
 				e.Handled = true;
 			}
@@ -154,23 +137,15 @@ namespace ItouziCalc
 
 		private void textBoxInterestRate_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!checkTextBoxNumberInput(textBoxInterestRate, e.KeyChar))
+			if (!CheckTextBoxNumberInput(textBoxInterestRate, e.KeyChar))
 			{
 				e.Handled = true;
 			}
 		}
 
-		private void textBoxInterest_KeyPress(object sender, KeyPressEventArgs e)
+		private void textBoxGainInterestDayPerMonth_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!checkTextBoxNumberInput(textBoxInterest, e.KeyChar))
-			{
-				e.Handled = true;
-			}
-		}
-
-		private void textBoxRemainInterest_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!checkTextBoxNumberInput(textBoxRemainInterest, e.KeyChar))
+			if (!CheckTextBoxNumberInput(textBoxGainInterestDayPerMonth, e.KeyChar))
 			{
 				e.Handled = true;
 			}
@@ -178,141 +153,88 @@ namespace ItouziCalc
 
 		private void textBoxTotalInterest_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!checkTextBoxNumberInput(textBoxTotalInterest, e.KeyChar))
+			if (!CheckTextBoxNumberInput(textBoxTotalInterest, e.KeyChar))
 			{
 				e.Handled = true;
 			}
 		}
 
-		private void calcDiscountGoldByCreditorBenifit(double creditorBenefitRate)
+		private void textBoxInterest_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			double principal = double.Parse(textBoxPrincipal.Text);
-			double investmentDateNum = getValueDateToTransferDate();
-			double interest = double.Parse(textBoxInterest.Text);
-			//double creditorBenefitRate = double.Parse(textBoxCreditorBenefitRate.Text) / 100.0;
+			if (!CheckTextBoxNumberInput(textBoxInterest, e.KeyChar))
+			{
+				e.Handled = true;
+			}
+		}
+
+		private void textBoxRemainInterest_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (!CheckTextBoxNumberInput(textBoxRemainInterest, e.KeyChar))
+			{
+				e.Handled = true;
+			}
+		}
+
+		private void CalcDiscountGoldByCreditorBenifit(double principal, double interest, double creditorBenefitRate)
+		{
+			double investmentDateNum = GetValueDateToTransferDate();
 			double discountGold = 0;
-			discountGold = -((creditorBenefitRate * investmentDateNum / 365) * principal - interest + calcPoundage());
+			discountGold = -((creditorBenefitRate * investmentDateNum / 365) * principal - interest + CalcPoundage());
 			textBoxDiscountGold.Text = discountGold.ToString("0.00");
 		}
 
-		private void calcDiscountGoldByInvestorBenifit(double investorBenefitRate)
+		private void CalcDiscountGoldByInvestorBenifit(double principal, double remainInterest, double investorBenefitRate)
 		{
-			double principal = double.Parse(textBoxPrincipal.Text);
 			double investmentRemainDateNum = GetTransferDateToDueDate();
-			double remainInterest = double.Parse(textBoxRemainInterest.Text);
-			//double investorBenefitRate = double.Parse(textBoxInvestorBenefitRate.Text) / 100.0;
 			double tmp = investorBenefitRate * investmentRemainDateNum / 365;
 			double discountGold = 0;
 			discountGold = (tmp * principal - remainInterest) / (tmp + 1);
 			textBoxDiscountGold.Text = discountGold.ToString("0.00");
 		}
 
-		private void calcCreditorBenefitRate(double discountGold)
+		private void CalcCreditorBenefitRate(double principal, double interest, double discountGold)
 		{
-			double interest = double.Parse(textBoxInterest.Text);
-			//double discountGold = double.Parse(textBoxDiscountGold.Text);
-			double principal = double.Parse(textBoxPrincipal.Text);
-			double investmentTotalDateNum = getValueDateToDueDate();
-			double investmentDateNum = getValueDateToTransferDate();
-
-			textBoxCreditorBenefitRate.Text = ((((interest - discountGold - calcPoundage()) / principal) * (365 / investmentDateNum)) * 100.0).ToString("0.00");
+			double investmentDateNum = GetValueDateToTransferDate();
+			textBoxCreditorBenefitRate.Text = ((((interest - discountGold - CalcPoundage()) / principal) * (365 / investmentDateNum)) * 100.0).ToString("0.00");
 		}
 
-		private void calcInvestorBenefitRate(double discountGold)
+		private void CalcInvestorBenefitRate(double principal, double remainInterest, double discountGold)
 		{
-			double remainInterest = double.Parse(textBoxRemainInterest.Text);
-			//double discountGold = double.Parse(textBoxDiscountGold.Text);
-			double principal = double.Parse(textBoxPrincipal.Text);
-			double investmentTotalDateNum = getValueDateToDueDate();
 			double investmentRemainDateNum = GetTransferDateToDueDate();
-
 			textBoxInvestorBenefitRate.Text = ((((remainInterest + discountGold) / (principal - discountGold)) * (365 / investmentRemainDateNum)) * 100.0).ToString("0.00");
 		}
 
-		private void buttonCalcByDiscountGold_Click(object sender, EventArgs e)
-		{
-// 			if (textBoxInterest.Text == "" ||
-// 				textBoxRemainInterest.Text == "")
-// 			{
-// 				return;
-// 			}
-// 
-// 			calcCreditorBenefitRate();
-// 			calcInvestorBenefitRate();
-		}
-
-		private void buttoCalcByCreditorBenefitRate_Click(object sender, EventArgs e)
-		{
-// 			if (textBoxInterest.Text == "" ||
-// 				textBoxRemainInterest.Text == "")
-// 			{
-// 				return;
-// 			}
-// 
-// 			calcDiscountGoldByCreditorBenifit();
-// 			calcInvestorBenefitRate();
-		}
-
-		private void buttonCalcByInvestorBenefitRate_Click(object sender, EventArgs e)
-		{
-// 			if (textBoxInterest.Text == "" ||
-// 				textBoxRemainInterest.Text == "")
-// 			{
-// 				return;
-// 			}
-// 
-// 			calcDiscountGoldByInvestorBenifit();
-// 			calcCreditorBenefitRate();
-		}
-
-		// 初始化按钮的Click事件
-		private void buttonReset_Click(object sender, EventArgs e)
-		{
-			textBoxPrincipal.Text = "";
-			textBoxInterestRate.Text = "";
-			textBoxInterest.Text = "";
-			textBoxRemainInterest.Text = "";
-			textBoxDiscountGold.Text = "";
-			textBoxCreditorBenefitRate.Text = "";
-			textBoxInvestorBenefitRate.Text = "";
-			textBoxTotalInterest.Text = "";
-
-			dateTimePickerValueDay.ResetText();
-			dateTimePickerDueDay.ResetText();
-			dateTimePickerTransferDay.ResetText();
-		}
-
-		private double getTotalInterest()
+		private double GetTotalInterest()
 		{
 			double principle = double.Parse(textBoxPrincipal.Text);
-			return (principle * double.Parse(textBoxInterestRate.Text) / 100.0) / 365 * getValueDateToDueDate();
+			return (principle * double.Parse(textBoxInterestRate.Text) / 100.0) / 365 * GetValueDateToDueDate();
 		}
 
-		private bool checkNeedCalcInterest()
+		private bool IsBaseInfoSufficientToCalcInterest()
 		{
-			if (textBoxPrincipal.Text != "" &&
-				textBoxInterestRate.Text != "" &&
-				textBoxGainInterestDayPerMonth.Text != "")
+			if (textBoxPrincipal.Text == "" ||
+				textBoxInterestRate.Text == "" ||
+				textBoxGainInterestDayPerMonth.Text == "")
 			{
-				return true;
+				return false;
 			}
-			return false;
+			return true;
 		}
 
-		private void calcInterest()
+		private void CalcInterest()
 		{
 			double principle = double.Parse(textBoxPrincipal.Text);
-			if (principle > 0.0)
+			//if (principle > 0.0)
 			{
-				double gainInterest = getGainInterest();
-				double totalInterest = getTotalInterest();
+				double gainInterest = GetGainInterest();
+				double totalInterest = GetTotalInterest();
 				textBoxTotalInterest.Text = totalInterest.ToString("0.00");
 				textBoxInterest.Text = gainInterest.ToString("0.00");
 				textBoxRemainInterest.Text = (totalInterest - gainInterest).ToString("0.00");
 			}
 		}
 
-		private double getGainInterest()
+		private double GetGainInterest()
 		{
 			List<InterestPaymentInfo> monthlyInterestInfoList = GetInterestPaymentInfoTable();
 			double totalInterest = 0.0;
@@ -326,50 +248,56 @@ namespace ItouziCalc
 			return totalInterest;
 		}
 
+		private void dateTimePickerValueDay_Leave(object sender, EventArgs e)
+		{
+			if (IsBaseInfoSufficientToCalcInterest())
+			{
+				CalcInterest();
+			}
+		}
+
+		private void dateTimePickerDueDay_Leave(object sender, EventArgs e)
+		{
+			if (IsBaseInfoSufficientToCalcInterest())
+			{
+				CalcInterest();
+			}
+		}
+
+		private void dateTimePickerTransferDay_Leave(object sender, EventArgs e)
+		{
+			if (IsBaseInfoSufficientToCalcInterest())
+			{
+				CalcInterest();
+			}
+		}
+
 		private void textBoxPrincipal_Leave(object sender, EventArgs e)
 		{
-			if (checkNeedCalcInterest())
+			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				calcInterest();
-			}
-			else
-			{
-				textBoxInterest.Text = "";
-				textBoxRemainInterest.Text = "";
-				textBoxTotalInterest.Text = "";
+				CalcInterest();
 			}
 		}
 
 		private void textBoxPoundage_Leave(object sender, EventArgs e)
 		{
-			calcInterest();
+
 		}
 
 		private void textBoxInterestRate_Leave(object sender, EventArgs e)
 		{
-			if (checkNeedCalcInterest())
+			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				calcInterest();
-			}
-			else
-			{
-				textBoxInterest.Text = "";
-				textBoxRemainInterest.Text = "";
-				textBoxTotalInterest.Text = "";
+				CalcInterest();
 			}
 		}
 
 		private void textBoxGainInterestDayPerMonth_Leave(object sender, EventArgs e)
 		{
-			if (checkNeedCalcInterest())
+			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				calcInterest();
-			}
-			else
-			{
-				textBoxInterest.Text = "";
-				textBoxRemainInterest.Text = "";
-				textBoxTotalInterest.Text = "";
+				CalcInterest();
 			}
 		}
 
@@ -488,20 +416,52 @@ namespace ItouziCalc
 			return GetDailyInterest() * days;
 		}
 
-		private void textBoxCreditorBenefitRate_KeyPress(object sender, KeyPressEventArgs e)
+		private double GetDiscountGold()
 		{
-
+			double discountGold = 0;
+			if (!double.TryParse(textBoxDiscountGold.Text, out discountGold))
+			{
+				discountGold = 0;
+			}
+			return discountGold;
 		}
 
-		private void textBoxInvestorBenefitRate_KeyPress(object sender, KeyPressEventArgs e)
+		private double GetCreditorBenefitRate()
 		{
+			double creditorBenefitRate = 0;
+			if (!double.TryParse(textBoxCreditorBenefitRate.Text, out creditorBenefitRate))
+			{
+				creditorBenefitRate = 0;
+			}
+			return creditorBenefitRate / 100.0;
+		}
 
+		private double GetInvestorBenefitRate()
+		{
+			double investorBenefitRate = 0;
+			if (!double.TryParse(textBoxInvestorBenefitRate.Text, out investorBenefitRate))
+			{
+				investorBenefitRate = 0;
+			}
+			return investorBenefitRate / 100.0;
+		}
+
+		private bool IsBaseInfoSufficientToCalcAdvanceInfo()
+		{
+			if (textBoxPrincipal.Text == "" ||
+				textBoxPoundage.Text == "" ||
+				textBoxInterest.Text == "" ||
+				textBoxRemainInterest.Text == ""
+				)
+			{
+				return false;
+			}
+			return true;
 		}
 
 		private void textBoxDiscountGold_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (textBoxInterest.Text == "" ||
-				textBoxRemainInterest.Text == "")
+			if (!IsBaseInfoSufficientToCalcAdvanceInfo())
 			{
 				return;
 			}
@@ -513,20 +473,17 @@ namespace ItouziCalc
 				return;
 			}
 
-			double discountGold = 0;
-			if (!double.TryParse(textBoxDiscountGold.Text, out discountGold))
-			{
-				discountGold = 0;
-			}
-
-			calcCreditorBenefitRate(discountGold);
-			calcInvestorBenefitRate(discountGold);
+			CalcCreditorBenefitRate(double.Parse(textBoxPrincipal.Text),
+									double.Parse(textBoxInterest.Text),
+									GetDiscountGold());
+			CalcInvestorBenefitRate(double.Parse(textBoxPrincipal.Text),
+									double.Parse(textBoxRemainInterest.Text),
+									GetDiscountGold());
 		}
 
 		private void textBoxCreditorBenefitRate_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (textBoxInterest.Text == "" ||
-				textBoxRemainInterest.Text == "")
+			if (!IsBaseInfoSufficientToCalcAdvanceInfo())
 			{
 				return;
 			}
@@ -538,21 +495,17 @@ namespace ItouziCalc
 				return;
 			}
 
-			double creditorBenefitRate = 0;
-			if (!double.TryParse(textBoxCreditorBenefitRate.Text, out creditorBenefitRate))
-			{
-				creditorBenefitRate = 0;
-			}
-
-			calcDiscountGoldByCreditorBenifit(creditorBenefitRate / 100.0);
-			double discountGold = double.Parse(textBoxDiscountGold.Text);
-			calcInvestorBenefitRate(discountGold);
+			CalcDiscountGoldByCreditorBenifit(double.Parse(textBoxPrincipal.Text),
+											  double.Parse(textBoxInterest.Text),
+											  GetCreditorBenefitRate());
+			CalcInvestorBenefitRate(double.Parse(textBoxPrincipal.Text),
+									double.Parse(textBoxRemainInterest.Text),
+									GetDiscountGold());
 		}
 
 		private void textBoxInvestorBenefitRate_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (textBoxInterest.Text == "" ||
-				textBoxRemainInterest.Text == "")
+			if (!IsBaseInfoSufficientToCalcAdvanceInfo())
 			{
 				return;
 			}
@@ -564,65 +517,46 @@ namespace ItouziCalc
 				return;
 			}
 
-			double investorBenefitRate = 0;
-			if (!double.TryParse(textBoxInvestorBenefitRate.Text, out investorBenefitRate))
-			{
-				investorBenefitRate = 0;
-			}
-
-			calcDiscountGoldByInvestorBenifit(investorBenefitRate / 100.0);
-			double discountGold = double.Parse(textBoxDiscountGold.Text);
-			calcCreditorBenefitRate(discountGold);
+			CalcDiscountGoldByInvestorBenifit(double.Parse(textBoxPrincipal.Text),
+											  double.Parse(textBoxRemainInterest.Text),
+											  GetInvestorBenefitRate());
+			CalcCreditorBenefitRate(double.Parse(textBoxPrincipal.Text),
+									double.Parse(textBoxInterest.Text),
+									GetDiscountGold());
 		}
 
 		private void textBoxPrincipal_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (checkNeedCalcInterest())
+			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				calcInterest();
-			}
-			else
-			{
-				textBoxInterest.Text = "";
-				textBoxRemainInterest.Text = "";
-				textBoxTotalInterest.Text = "";
+				CalcInterest();
 			}
 		}
 
 		private void textBoxInterestRate_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (checkNeedCalcInterest())
+			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				calcInterest();
-			}
-			else
-			{
-				textBoxInterest.Text = "";
-				textBoxRemainInterest.Text = "";
-				textBoxTotalInterest.Text = "";
+				CalcInterest();
 			}
 		}
 
 		private void textBoxGainInterestDayPerMonth_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (checkNeedCalcInterest())
+			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				calcInterest();
-			}
-			else
-			{
-				textBoxInterest.Text = "";
-				textBoxRemainInterest.Text = "";
-				textBoxTotalInterest.Text = "";
+				CalcInterest();
 			}
 		}
 
-		private void textBoxGainInterestDayPerMonth_KeyPress(object sender, KeyPressEventArgs e)
+		private void textBoxInterest_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (!checkTextBoxNumberInput(textBoxGainInterestDayPerMonth, e.KeyChar))
-			{
-				e.Handled = true;
-			}
+
+		}
+
+		private void textBoxRemainInterest_KeyUp(object sender, KeyEventArgs e)
+		{
+
 		}
 	}
 }
