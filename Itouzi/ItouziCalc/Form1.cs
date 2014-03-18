@@ -54,16 +54,9 @@ namespace ItouziCalc
 		}
 
 		// 计算手续费
-		private double CalcPoundage()
+		private double CalcPoundage(double principle, double poundageRate)
 		{
-			double principle = 0.0;
-			float poundageRate = 0.0F;
-
-			if (double.TryParse(textBoxPrincipal.Text, out principle) && float.TryParse(textBoxPoundage.Text, out poundageRate))
-			{
-				return principle * poundageRate / 100.0;
-			}
-			return 0.0;
+			return principle * poundageRate;
 		}
 
 		private void ClearInterestInfo()
@@ -127,9 +120,9 @@ namespace ItouziCalc
 			}
 		}
 
-		private void textBoxPoundage_KeyPress(object sender, KeyPressEventArgs e)
+		private void textBoxPoundageRate_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!CheckTextBoxNumberInput(textBoxPoundage, e.KeyChar))
+			if (!CheckTextBoxNumberInput(textBoxPoundageRate, e.KeyChar))
 			{
 				e.Handled = true;
 			}
@@ -175,11 +168,11 @@ namespace ItouziCalc
 			}
 		}
 
-		private void CalcDiscountGoldByCreditorBenifit(double principal, double interest, double creditorBenefitRate)
+		private void CalcDiscountGoldByCreditorBenifit(double principal, double interest, double creditorBenefitRate, double poundageRate)
 		{
 			double investmentDateNum = GetValueDateToTransferDate();
 			double discountGold = 0;
-			discountGold = -((creditorBenefitRate * investmentDateNum / 365) * principal - interest + CalcPoundage());
+			discountGold = -((creditorBenefitRate * investmentDateNum / 365) * principal - interest + CalcPoundage(principal, poundageRate));
 			textBoxDiscountGold.Text = discountGold.ToString("0.00");
 		}
 
@@ -192,10 +185,10 @@ namespace ItouziCalc
 			textBoxDiscountGold.Text = discountGold.ToString("0.00");
 		}
 
-		private void CalcCreditorBenefitRate(double principal, double interest, double discountGold)
+		private void CalcCreditorBenefitRate(double principal, double interest, double discountGold, double poundageRate)
 		{
 			double investmentDateNum = GetValueDateToTransferDate();
-			textBoxCreditorBenefitRate.Text = ((((interest - discountGold - CalcPoundage()) / principal) * (365 / investmentDateNum)) * 100.0).ToString("0.00");
+			textBoxCreditorBenefitRate.Text = ((((interest - discountGold - CalcPoundage(principal, poundageRate)) / principal) * (365 / investmentDateNum)) * 100.0).ToString("0.00");
 		}
 
 		private void CalcInvestorBenefitRate(double principal, double remainInterest, double discountGold)
@@ -204,10 +197,9 @@ namespace ItouziCalc
 			textBoxInvestorBenefitRate.Text = ((((remainInterest + discountGold) / (principal - discountGold)) * (365 / investmentRemainDateNum)) * 100.0).ToString("0.00");
 		}
 
-		private double GetTotalInterest()
+		private double GetTotalInterest(double principle, double interestRate, int totalDays)
 		{
-			double principle = double.Parse(textBoxPrincipal.Text);
-			return (principle * double.Parse(textBoxInterestRate.Text) / 100.0) / 365 * GetValueDateToDueDate();
+			return principle * interestRate / 100.0 / 365 * totalDays;
 		}
 
 		private bool IsBaseInfoSufficientToCalcInterest()
@@ -221,17 +213,13 @@ namespace ItouziCalc
 			return true;
 		}
 
-		private void CalcInterest()
+		private void CalcInterest(double principle, double interestRate, int totalDays)
 		{
-			double principle = double.Parse(textBoxPrincipal.Text);
-			//if (principle > 0.0)
-			{
-				double gainInterest = GetGainInterest();
-				double totalInterest = GetTotalInterest();
-				textBoxTotalInterest.Text = totalInterest.ToString("0.00");
-				textBoxInterest.Text = gainInterest.ToString("0.00");
-				textBoxRemainInterest.Text = (totalInterest - gainInterest).ToString("0.00");
-			}
+			double gainInterest = GetGainInterest();
+			double totalInterest = GetTotalInterest(principle, interestRate, totalDays);
+			textBoxTotalInterest.Text = totalInterest.ToString("0.00");
+			textBoxInterest.Text = gainInterest.ToString("0.00");
+			textBoxRemainInterest.Text = (totalInterest - gainInterest).ToString("0.00");
 		}
 
 		private double GetGainInterest()
@@ -252,7 +240,9 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
@@ -260,7 +250,9 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
@@ -268,7 +260,9 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
@@ -276,11 +270,13 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
-		private void textBoxPoundage_Leave(object sender, EventArgs e)
+		private void textBoxPoundageRate_Leave(object sender, EventArgs e)
 		{
 
 		}
@@ -289,7 +285,9 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
@@ -297,7 +295,9 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
@@ -416,6 +416,16 @@ namespace ItouziCalc
 			return GetDailyInterest() * days;
 		}
 
+		private double GetPoundageRate()
+		{
+			double poundageRate = 0;
+			if (!double.TryParse(textBoxPoundageRate.Text, out poundageRate))
+			{
+				poundageRate = 0;
+			}
+			return poundageRate / 100.0;
+		}
+
 		private double GetDiscountGold()
 		{
 			double discountGold = 0;
@@ -449,7 +459,7 @@ namespace ItouziCalc
 		private bool IsBaseInfoSufficientToCalcAdvanceInfo()
 		{
 			if (textBoxPrincipal.Text == "" ||
-				textBoxPoundage.Text == "" ||
+				textBoxPoundageRate.Text == "" ||
 				textBoxInterest.Text == "" ||
 				textBoxRemainInterest.Text == ""
 				)
@@ -459,7 +469,7 @@ namespace ItouziCalc
 			return true;
 		}
 
-		private void textBoxDiscountGold_KeyUp(object sender, KeyEventArgs e)
+		private void CalcInfoByDiscountGold()
 		{
 			if (!IsBaseInfoSufficientToCalcAdvanceInfo())
 			{
@@ -475,13 +485,24 @@ namespace ItouziCalc
 
 			CalcCreditorBenefitRate(double.Parse(textBoxPrincipal.Text),
 									double.Parse(textBoxInterest.Text),
-									GetDiscountGold());
+									GetDiscountGold(),
+									GetPoundageRate());
 			CalcInvestorBenefitRate(double.Parse(textBoxPrincipal.Text),
 									double.Parse(textBoxRemainInterest.Text),
 									GetDiscountGold());
 		}
 
-		private void textBoxCreditorBenefitRate_KeyUp(object sender, KeyEventArgs e)
+		private void textBoxDiscountGold_KeyUp(object sender, KeyEventArgs e)
+		{
+			CalcInfoByDiscountGold();
+		}
+
+		private void textBoxDiscountGold_Leave(object sender, EventArgs e)
+		{
+			CalcInfoByDiscountGold();
+		}
+
+		private void CalcInfoByCreditorBenefitRate()
 		{
 			if (!IsBaseInfoSufficientToCalcAdvanceInfo())
 			{
@@ -497,13 +518,24 @@ namespace ItouziCalc
 
 			CalcDiscountGoldByCreditorBenifit(double.Parse(textBoxPrincipal.Text),
 											  double.Parse(textBoxInterest.Text),
-											  GetCreditorBenefitRate());
+											  GetCreditorBenefitRate(),
+											  GetPoundageRate());
 			CalcInvestorBenefitRate(double.Parse(textBoxPrincipal.Text),
 									double.Parse(textBoxRemainInterest.Text),
 									GetDiscountGold());
 		}
 
-		private void textBoxInvestorBenefitRate_KeyUp(object sender, KeyEventArgs e)
+		private void textBoxCreditorBenefitRate_KeyUp(object sender, KeyEventArgs e)
+		{
+			CalcInfoByCreditorBenefitRate();
+		}
+
+		private void textBoxCreditorBenefitRate_Leave(object sender, EventArgs e)
+		{
+			CalcInfoByCreditorBenefitRate();
+		}
+
+		private void CalcInofByInvestorBenefitRate()
 		{
 			if (!IsBaseInfoSufficientToCalcAdvanceInfo())
 			{
@@ -522,14 +554,27 @@ namespace ItouziCalc
 											  GetInvestorBenefitRate());
 			CalcCreditorBenefitRate(double.Parse(textBoxPrincipal.Text),
 									double.Parse(textBoxInterest.Text),
-									GetDiscountGold());
+									GetDiscountGold(),
+									GetPoundageRate());
+		}
+
+		private void textBoxInvestorBenefitRate_KeyUp(object sender, KeyEventArgs e)
+		{
+			CalcInofByInvestorBenefitRate();
+		}
+
+		private void textBoxInvestorBenefitRate_Leave(object sender, EventArgs e)
+		{
+			CalcInofByInvestorBenefitRate();
 		}
 
 		private void textBoxPrincipal_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
@@ -537,7 +582,9 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
@@ -545,7 +592,9 @@ namespace ItouziCalc
 		{
 			if (IsBaseInfoSufficientToCalcInterest())
 			{
-				CalcInterest();
+				CalcInterest(double.Parse(textBoxPrincipal.Text),
+							 double.Parse(textBoxInterestRate.Text),
+							 GetValueDateToDueDate());
 			}
 		}
 
